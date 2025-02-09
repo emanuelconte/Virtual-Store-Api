@@ -10,13 +10,10 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    // Busca um usuário pelo email
     Optional<Usuario> findByEmail(String email);
 
-    // Busca usuários pelo nome
     List<Usuario> findByNomeContainingIgnoreCase(String nome);
 
-    // Busca usuários por role
     @Query("SELECT u FROM Usuario u JOIN u.roles r WHERE r = :role")
     List<Usuario> findByRole(@Param("role") String role);
 }
