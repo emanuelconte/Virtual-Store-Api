@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -15,6 +17,8 @@ import java.util.Set;
 @Table(name = "usuarios")
 public class Usuario {
 
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +36,7 @@ public class Usuario {
     @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
     private String senha;
 
+    @Getter
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"))
     @Column(name = "role")
@@ -41,6 +46,34 @@ public class Usuario {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.roles = roles;
+    }
+
+    public @NotBlank(message = "O nome é obrigatório") @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres") String getNome() {
+        return nome;
+    }
+
+    public void setNome(@NotBlank(message = "O nome é obrigatório") @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres") String nome) {
+        this.nome = nome;
+    }
+
+    public @NotBlank(message = "O email é obrigatório") @Email(message = "O email deve ser válido") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank(message = "O email é obrigatório") @Email(message = "O email deve ser válido") String email) {
+        this.email = email;
+    }
+
+    public @NotBlank(message = "A senha é obrigatória") @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres") String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(@NotBlank(message = "A senha é obrigatória") @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres") String senha) {
+        this.senha = senha;
+    }
+
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }
