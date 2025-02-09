@@ -1,6 +1,7 @@
 package com.lojavirtual.api.controller;
 
 import com.lojavirtual.api.model.Usuario;
+import com.lojavirtual.api.security.JwtUtil;
 import com.lojavirtual.api.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody Usuario credenciais) {
+    public ResponseEntity<String> login(@RequestBody Usuario credenciais) {
         return authService.autenticarUsuario(credenciais.getEmail(), credenciais.getSenha())
-                .map(ResponseEntity::ok)
+                .map(usuario -> {
+                    String token = JwtUtil.generateToken(usuario.getEmail());
+                    return ResponseEntity.ok(token);
+                })
                 .orElse(ResponseEntity.status(401).build());
     }
 
