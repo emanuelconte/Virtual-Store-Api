@@ -17,8 +17,6 @@ import java.util.Set;
 @Table(name = "usuarios")
 public class Usuario {
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +34,6 @@ public class Usuario {
     @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
     private String senha;
 
-    @Getter
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"))
     @Column(name = "role")
@@ -73,7 +70,12 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
+
     public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
+
 }
