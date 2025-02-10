@@ -1,7 +1,6 @@
 package com.lojavirtual.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -69,7 +68,7 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public StatusPedido getStatus() {
+    public String getStatus() {
         return status;
     }
 
