@@ -1,6 +1,7 @@
 package com.lojavirtual.api.controller;
 
-import com.lojavirtual.api.model.Produto;
+import com.lojavirtual.api.dto.ProdutoDTO;
+import com.lojavirtual.api.dto.ProdutoRequestDTO;
 import com.lojavirtual.api.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +17,29 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto) {
-        Produto novoProduto = produtoService.cadastrarProduto(produto);
-        return ResponseEntity.ok(novoProduto);
+    public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoRequestDTO produtoRequestDTO) {
+        ProdutoDTO produtoDTO = produtoService.cadastrarProduto(produtoRequestDTO);
+        return ResponseEntity.ok(produtoDTO);
     }
 
     @GetMapping
-    public ResponseEntity<List<Produto>> listarProdutos() {
-        List<Produto> produtos = produtoService.listarProdutos();
-        return ResponseEntity.ok(produtos);
+    public ResponseEntity<List<ProdutoDTO>> listarProdutos() {
+        List<ProdutoDTO> produtosDTO = produtoService.listarProdutos();
+        return ResponseEntity.ok(produtosDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
-        return produtoService.buscarProdutoPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable Long id) {
+        ProdutoDTO produtoDTO = produtoService.buscarProdutoPorId(id);
+        return ResponseEntity.ok(produtoDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
-        Produto produto = produtoService.atualizarProduto(id, produtoAtualizado);
-        return ResponseEntity.ok(produto);
+    public ResponseEntity<ProdutoDTO> atualizarProduto(
+            @PathVariable Long id,
+            @RequestBody ProdutoRequestDTO produtoRequestDTO) {
+        ProdutoDTO produtoDTO = produtoService.atualizarProduto(id, produtoRequestDTO);
+        return ResponseEntity.ok(produtoDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -47,16 +49,16 @@ public class ProdutoController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<List<Produto>> listarProdutosPorCategoria(@PathVariable String categoria) {
-        List<Produto> produtos = produtoService.listarProdutosPorCategoria(categoria);
-        return ResponseEntity.ok(produtos);
+    public ResponseEntity<List<ProdutoDTO>> listarProdutosPorCategoria(@PathVariable String categoria) {
+        List<ProdutoDTO> produtosDTO = produtoService.listarProdutosPorCategoria(categoria);
+        return ResponseEntity.ok(produtosDTO);
     }
-
+    
     @GetMapping("/preco")
-    public ResponseEntity<List<Produto>> listarProdutosPorFaixaDePreco(
+    public ResponseEntity<List<ProdutoDTO>> listarProdutosPorFaixaDePreco(
             @RequestParam Double precoMin,
             @RequestParam Double precoMax) {
-        List<Produto> produtos = produtoService.listarProdutosPorFaixaDePreco(precoMin, precoMax);
-        return ResponseEntity.ok(produtos);
+        List<ProdutoDTO> produtosDTO = produtoService.listarProdutosPorFaixaDePreco(precoMin, precoMax);
+        return ResponseEntity.ok(produtosDTO);
     }
 }

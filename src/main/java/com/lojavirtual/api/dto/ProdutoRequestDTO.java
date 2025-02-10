@@ -1,5 +1,8 @@
 package com.lojavirtual.api.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 public class ProdutoRequestDTO {
@@ -25,7 +28,7 @@ public class ProdutoRequestDTO {
         this.descricao = descricao;
     }
 
-    public BigDecimal getPreco() {
+    public @NotNull(message = "O preço é obrigatório") @Positive(message = "O preço deve ser positivo") Double getPreco() {
         return preco;
     }
 
