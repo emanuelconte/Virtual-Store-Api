@@ -5,14 +5,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -38,6 +35,8 @@ public class Usuario {
     @CollectionTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"))
     @Column(name = "role")
     private Set<String> roles;
+
+    public Usuario() {}
 
     public Usuario(String nome, String email, String senha, Set<String> roles) {
         this.nome = nome;
