@@ -3,9 +3,8 @@ package com.lojavirtual.api.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Data
 @NoArgsConstructor
@@ -13,8 +12,6 @@ import lombok.Setter;
 @Table(name = "produtos")
 public class Produto {
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -76,5 +73,13 @@ public class Produto {
 
     public void setEstoque(@NotNull(message = "O estoque é obrigatório") @PositiveOrZero(message = "O estoque não pode ser negativo") Integer estoque) {
         this.estoque = estoque;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
