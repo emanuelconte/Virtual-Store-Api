@@ -1,5 +1,6 @@
 package com.lojavirtual.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -29,6 +30,12 @@ public class ItemPedido {
     @Positive(message = "O preço unitário deve ser positivo")
     private Double precoUnitario;
 
+    @NotNull(message = "O pedido é obrigatório")
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+
     public Long getId() {
         return id;
     }
@@ -37,27 +44,35 @@ public class ItemPedido {
         this.id = id;
     }
 
-    public @NotNull(message = "O produto é obrigatório") Produto getProduto() {
+    public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(@NotNull(message = "O produto é obrigatório") Produto produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
-    public @NotNull(message = "A quantidade é obrigatória") @Positive(message = "A quantidade deve ser positiva") Integer getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(@NotNull(message = "A quantidade é obrigatória") @Positive(message = "A quantidade deve ser positiva") Integer quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
-    public @NotNull(message = "O preço unitário é obrigatório") @Positive(message = "O preço unitário deve ser positivo") Double getPrecoUnitario() {
+    public Double getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(@NotNull(message = "O preço unitário é obrigatório") @Positive(message = "O preço unitário deve ser positivo") Double precoUnitario) {
+    public void setPrecoUnitario(Double precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }
