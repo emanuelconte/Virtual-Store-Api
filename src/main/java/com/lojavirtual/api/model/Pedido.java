@@ -1,5 +1,7 @@
 package com.lojavirtual.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -25,6 +27,7 @@ public class Pedido {
     @JoinColumn(name = "pedido_id")
     private List<ItemPedido> itens;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataPedido = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
