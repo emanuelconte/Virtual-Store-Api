@@ -1,7 +1,10 @@
 package com.lojavirtual.api.service;
 
+import com.lojavirtual.api.model.ItemPedido;
 import com.lojavirtual.api.model.Pedido;
+import com.lojavirtual.api.model.Produto;
 import com.lojavirtual.api.repository.PedidoRepository;
+import com.lojavirtual.api.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +16,21 @@ import java.util.Optional;
 public class PedidoService {
 
     @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
     private PedidoRepository pedidoRepository;
 
     @Transactional
     public Pedido criarPedido(Pedido pedido) {
+        for (ItemPedido item : pedido.getItens()) {
+            Produto produto = produtoRepository.findById(item.getProduto().getId())
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+            if (produto.getEstoque() < item.getQuantidade()) {
+                throw new RuntimeException("Estoque insuficiente para o produto: " + produto.getNome());
+            }
+            item.setPedido(pedido);
+        }
         return pedidoRepository.save(pedido);
     }
 
