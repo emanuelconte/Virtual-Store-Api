@@ -4,6 +4,8 @@ import com.lojavirtual.api.dto.ItemPedidoDTO;
 import com.lojavirtual.api.dto.ItemPedidoRequestDTO;
 import com.lojavirtual.api.dto.PedidoDTO;
 import com.lojavirtual.api.dto.PedidoRequestDTO;
+import com.lojavirtual.api.exception.EstoqueInsuficienteException;
+import com.lojavirtual.api.exception.RecursoNaoEncontradoException;
 import com.lojavirtual.api.model.ItemPedido;
 import com.lojavirtual.api.model.Pedido;
 import com.lojavirtual.api.model.Pedido.StatusPedido;
@@ -16,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,15 @@ public class PedidoService {
 
     @Transactional
     public PedidoDTO criarPedido(PedidoRequestDTO pedidoRequestDTO) {
+        for (ItemPedidoRequestDTO item : pedidoRequestDTO.getItens()) {
+            Produto produto = produtoRepository.findById(item.getProdutoId())
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + item.getProdutoId()));
+
+            if (produto.getEstoque() < item.getQuantidade()) {
+                throw new EstoqueInsuficienteException("Estoque insuficiente para o produto: " + produto.getNome());
+            }
+        }
+
         Pedido pedido = toEntity(pedidoRequestDTO);
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
         return toDTO(pedidoSalvo);
@@ -44,14 +54,14 @@ public class PedidoService {
 
     public PedidoDTO buscarPedidoPorId(Long id) {
         Pedido pedido = pedidoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pedido não encontrado com o ID: " + id));
         return toDTO(pedido);
     }
 
     @Transactional
     public PedidoDTO atualizarStatusPedido(Long id, StatusPedido novoStatus) {
         Pedido pedido = pedidoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pedido não encontrado com o ID: " + id));
         pedido.setStatus(novoStatus);
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
         return toDTO(pedidoAtualizado);
@@ -89,7 +99,7 @@ public class PedidoService {
     private ItemPedido toItemPedido(ItemPedidoRequestDTO itemRequestDTO) {
         ItemPedido item = new ItemPedido();
         Produto produto = produtoRepository.findById(itemRequestDTO.getProdutoId())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + itemRequestDTO.getProdutoId()));
 
         item.setProduto(produto);
         item.setQuantidade(itemRequestDTO.getQuantidade());
@@ -117,7 +127,7 @@ public class PedidoService {
         itemDTO.setId(item.getId());
         itemDTO.setProdutoId(item.getProduto().getId());
         itemDTO.setProdutoNome(item.getProduto().getNome());
-        itemDTO.setPrecoUnitario(BigDecimal.valueOf(item.getPrecoUnitario()));
+        itemDTO.setPrecoUnitario(item.getPrecoUnitario());
         itemDTO.setQuantidade(item.getQuantidade());
         return itemDTO;
     }

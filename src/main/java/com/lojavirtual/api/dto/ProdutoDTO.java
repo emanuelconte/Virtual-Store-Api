@@ -1,7 +1,5 @@
 package com.lojavirtual.api.dto;
 
-import java.math.BigDecimal;
-
 public class ProdutoDTO {
     private Long id;
     private String nome;

@@ -1,12 +1,10 @@
 package com.lojavirtual.api.dto;
 
-import java.math.BigDecimal;
-
 public class ItemPedidoDTO {
     private Long id;
     private Long produtoId;
     private String produtoNome;
-    private BigDecimal precoUnitario;
+    private Double precoUnitario;
     private int quantidade;
 
     public Long getId() {
@@ -33,11 +31,11 @@ public class ItemPedidoDTO {
         this.produtoNome = produtoNome;
     }
 
-    public BigDecimal getPrecoUnitario() {
+    public Double getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
+    public void setPrecoUnitario(Double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 
