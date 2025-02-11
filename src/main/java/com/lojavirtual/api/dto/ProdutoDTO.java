@@ -6,7 +6,7 @@ public class ProdutoDTO {
     private Long id;
     private String nome;
     private String descricao;
-    private BigDecimal preco;
+    private Double preco;
     private String categoria;
     private int estoque;
 
@@ -34,11 +34,11 @@ public class ProdutoDTO {
         this.descricao = descricao;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 

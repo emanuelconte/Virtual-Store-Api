@@ -84,7 +84,7 @@ public class ProdutoService {
         produtoDTO.setId(produto.getId());
         produtoDTO.setNome(produto.getNome());
         produtoDTO.setDescricao(produto.getDescricao());
-        produtoDTO.setPreco(BigDecimal.valueOf(produto.getPreco()));
+        produtoDTO.setPreco(produto.getPreco());
         produtoDTO.setCategoria(produto.getCategoria());
         produtoDTO.setEstoque(produto.getEstoque());
         return produtoDTO;

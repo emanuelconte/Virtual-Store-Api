@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class ProdutoRequestDTO {
     private String nome;
     private String descricao;
-    private BigDecimal preco;
+    private Double preco;
     private String categoria;
     private int estoque;
 
@@ -32,7 +32,7 @@ public class ProdutoRequestDTO {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 

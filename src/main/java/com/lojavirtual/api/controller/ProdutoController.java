@@ -53,7 +53,7 @@ public class ProdutoController {
         List<ProdutoDTO> produtosDTO = produtoService.listarProdutosPorCategoria(categoria);
         return ResponseEntity.ok(produtosDTO);
     }
-    
+
     @GetMapping("/preco")
     public ResponseEntity<List<ProdutoDTO>> listarProdutosPorFaixaDePreco(
             @RequestParam Double precoMin,

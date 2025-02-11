@@ -51,7 +51,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public @NotNull(message = "O preço é obrigatório") @Positive(message = "O preço deve ser positivo") Double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 

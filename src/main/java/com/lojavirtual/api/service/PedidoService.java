@@ -102,7 +102,7 @@ public class PedidoService {
         pedidoDTO.setId(pedido.getId());
         pedidoDTO.setClienteId(pedido.getClienteId());
         pedidoDTO.setDataPedido(pedido.getDataPedido());
-        pedidoDTO.setStatus(pedido.getStatus());
+        pedidoDTO.setStatus(String.valueOf(pedido.getStatus()));
 
         List<ItemPedidoDTO> itensDTO = pedido.getItens().stream()
                 .map(this::toItemPedidoDTO)

@@ -68,7 +68,7 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public String getStatus() {
+    public StatusPedido getStatus() {
         return status;
     }
 
