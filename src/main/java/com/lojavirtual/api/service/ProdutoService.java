@@ -82,6 +82,10 @@ public class ProdutoService {
         }
 
         List<Produto> produtos = produtoRepository.findByCategoria(categoria);
+        if (produtos.isEmpty()) {
+            throw new RecursoNaoEncontradoException("Nenhum produto encontrado para a categoria: " + categoria);
+        }
+
         return produtos.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
