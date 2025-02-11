@@ -1,13 +1,26 @@
 package com.lojavirtual.api.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Schema(description = "Representa um pedido na loja virtual")
 public class PedidoDTO {
+
+    @Schema(description = "ID do pedido", example = "1")
     private Long id;
+
+    @Schema(description = "ID do cliente", example = "1")
     private Long clienteId;
+
+    @Schema(description = "Lista de itens do pedido")
     private List<ItemPedidoDTO> itens;
+
+    @Schema(description = "Data do pedido")
     private LocalDateTime dataPedido;
+
+    @Schema(description = "Status do pedido", example = "PENDENTE")
     private String status;
 
     public Long getId() {

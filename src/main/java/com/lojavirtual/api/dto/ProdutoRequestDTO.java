@@ -1,14 +1,26 @@
 package com.lojavirtual.api.dto;
 
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-
+@Schema(description = "Representa uma Request do Produto na loja virtual")
 public class ProdutoRequestDTO {
+
+    @Schema(description = "Nome do produto", example = "Banana")
     private String nome;
+
+    @Schema(description = "Descricao do produto", example = "Este produto e uma fruta")
     private String descricao;
+
+    @Schema(description = "Preco do produto", example = "2.50")
     private Double preco;
+
+    @Schema(description = "Categoria do produto", example = "Alimento")
     private String categoria;
+
+    @Schema(description = "Estoque do produto", example = "1")
     private int estoque;
 
     public String getNome() {
