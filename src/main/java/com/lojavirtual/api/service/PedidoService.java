@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,16 +35,20 @@ public class PedidoService {
 
     @Transactional
     public PedidoDTO criarPedido(PedidoRequestDTO pedidoRequestDTO) {
+        Map<Long, Produto> produtosRecuperados = new HashMap<>();
+
         for (ItemPedidoRequestDTO item : pedidoRequestDTO.getItens()) {
-            Produto produto = produtoRepository.findById(item.getProdutoId())
-                    .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + item.getProdutoId()));
+            Produto produto = produtosRecuperados.computeIfAbsent(item.getProdutoId(), id ->
+                    produtoRepository.findById(id)
+                            .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + id))
+            );
 
             if (produto.getEstoque() < item.getQuantidade()) {
                 throw new EstoqueInsuficienteException("Estoque insuficiente para o produto: " + produto.getNome());
             }
         }
 
-        Pedido pedido = toEntity(pedidoRequestDTO);
+        Pedido pedido = toEntity(pedidoRequestDTO, produtosRecuperados);
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
         return toDTO(pedidoSalvo);
     }
@@ -82,24 +88,27 @@ public class PedidoService {
         return pedidos.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private Pedido toEntity(PedidoRequestDTO pedidoRequestDTO) {
+    private Pedido toEntity(PedidoRequestDTO pedidoRequestDTO, Map<Long, Produto> produtosRecuperados) {
         Pedido pedido = new Pedido();
         pedido.setClienteId(pedidoRequestDTO.getClienteId());
         pedido.setDataPedido(LocalDateTime.now());
         pedido.setStatus(StatusPedido.PENDENTE);
 
         List<ItemPedido> itens = pedidoRequestDTO.getItens().stream()
-                .map(this::toItemPedido)
+                .map(itemRequestDTO -> toItemPedido(itemRequestDTO, produtosRecuperados))
                 .collect(Collectors.toList());
 
         pedido.setItens(itens);
         return pedido;
     }
 
-    private ItemPedido toItemPedido(ItemPedidoRequestDTO itemRequestDTO) {
+    private ItemPedido toItemPedido(ItemPedidoRequestDTO itemRequestDTO, Map<Long, Produto> produtosRecuperados) {
         ItemPedido item = new ItemPedido();
-        Produto produto = produtoRepository.findById(itemRequestDTO.getProdutoId())
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + itemRequestDTO.getProdutoId()));
+        Produto produto = produtosRecuperados.get(itemRequestDTO.getProdutoId());
+
+        if (produto == null) {
+            throw new RecursoNaoEncontradoException("Produto não encontrado com o ID: " + itemRequestDTO.getProdutoId());
+        }
 
         item.setProduto(produto);
         item.setQuantidade(itemRequestDTO.getQuantidade());
