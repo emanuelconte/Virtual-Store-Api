@@ -33,7 +33,7 @@ public class Produto {
 
     @NotNull(message = "O estoque é obrigatório")
     @PositiveOrZero(message = "O estoque não pode ser negativo")
-    private Integer estoque;
+    private Integer estoque = 0;
 
     public @NotBlank(message = "O nome é obrigatório") @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres") String getNome() {
         return nome;

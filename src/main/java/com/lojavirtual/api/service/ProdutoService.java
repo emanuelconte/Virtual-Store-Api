@@ -115,7 +115,7 @@ public class ProdutoService {
         produtoDTO.setDescricao(produto.getDescricao());
         produtoDTO.setPreco(produto.getPreco());
         produtoDTO.setCategoria(produto.getCategoria());
-        produtoDTO.setEstoque(produto.getEstoque());
+        produtoDTO.setEstoque(produto.getEstoque() != null ? produto.getEstoque() : 0);
         return produtoDTO;
     }
 }
