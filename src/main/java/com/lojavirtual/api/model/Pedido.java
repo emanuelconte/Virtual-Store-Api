@@ -33,7 +33,7 @@ public class Pedido {
     private StatusPedido status = StatusPedido.PENDENTE;
 
     public enum StatusPedido {
-        PENDENTE, CONCLUIDO, CANCELADO;
+        PENDENTE, CONCLUIDO, CANCELADO, EM_PROCESSAMENTO;
     }
 
     public Long getId() {
