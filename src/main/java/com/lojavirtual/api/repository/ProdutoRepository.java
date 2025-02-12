@@ -14,5 +14,4 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query("SELECT p FROM Produto p WHERE p.preco BETWEEN :precoMin AND :precoMax")
     List<Produto> findByPrecoBetween(@Param("precoMin") Double precoMin, @Param("precoMax") Double precoMax);
 
-    List<Produto> findByEstoqueGreaterThan(Integer estoque);
 }

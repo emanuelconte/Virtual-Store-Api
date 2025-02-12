@@ -3,7 +3,6 @@ package com.lojavirtual.api.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -12,10 +11,10 @@ import java.util.Date;
 public class JwtUtil {
 
     //@Value("${jwt.secret}")
-    private static String secret = "seuSegredoSuperSecreto";
+    private static final String secret = "mySecretUniqueKey";
 
     //@Value("${jwt.expiration}")
-    private static Long expiration = 86400000L;
+    private static final Long expiration = 86400000L;
 
     public static String generateToken(String email) {
         return Jwts.builder()
