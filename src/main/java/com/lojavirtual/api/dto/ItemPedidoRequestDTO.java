@@ -11,6 +11,11 @@ public class ItemPedidoRequestDTO {
     @Schema(description = "Quantidade do pedido", example = "1")
     private int quantidade;
 
+    public ItemPedidoRequestDTO(Long produtoId, int quantidade) {
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
+    }
+
     public Long getProdutoId() {
         return produtoId;
     }
