@@ -19,6 +19,9 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/login")
     @Operation(summary = "Autenticar usuário", description = "Autentica um usuário e retorna um token JWT")
     @ApiResponse(responseCode = "200", description = "Autenticação bem-sucedida e token retornado")
@@ -26,7 +29,7 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody Usuario credenciais) {
         return authService.autenticarUsuario(credenciais.getEmail(), credenciais.getSenha())
                 .map(usuario -> {
-                    String token = JwtUtil.generateToken(usuario.getEmail());
+                    String token = jwtUtil.generateToken(usuario.getEmail());
                     return ResponseEntity.ok(token);
                 })
                 .orElse(ResponseEntity.status(401).build());
