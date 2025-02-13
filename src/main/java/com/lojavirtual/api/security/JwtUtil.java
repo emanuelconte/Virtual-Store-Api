@@ -43,7 +43,7 @@ public class JwtUtil {
         return null;
     }
 
-    private Claims getClaims(String token) {
+    protected Claims getClaims(String token) {
         try {
             return Jwts.parser()
                     .setSigningKey(secret.getBytes())
