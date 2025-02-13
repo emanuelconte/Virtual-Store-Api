@@ -40,7 +40,7 @@ O projeto utiliza o Flyway para gerenciar as migrations do banco de dados. As mi
 
 Os dados iniciais são inseridos através da migration `V2__populate_data.sql`. Certifique-se de que essa migration esteja configurada corretamente.
 
-## Executando o Projeto:
+## Executando o Projeto
 
 ### Execute o projeto utilizando o Maven:
 ```bash
@@ -52,7 +52,7 @@ mvn spring-boot:run
 
 A documentação da API foi gerada utilizando o Springdoc OpenAPI, que é a biblioteca mais moderna e compatível com o Spring Boot 3.x.
 
-### Acesso à Documentação:
+### Acesso à Documentação
 
 Para acessar a documentação no Swagger, abra o navegador e acesse:
 
@@ -86,6 +86,11 @@ Utilizei o Flyway para gerenciar as migrations do banco de dados. É necessário
 
 ## Contribuição
 Se você deseja contribuir com este projeto, sinta-se à vontade para abrir issues ou enviar pull requests. Toda contribuição é bem-vinda!
+1. Fork no repositorio.
+2. Crie uma branch com a feature (
+`git checkout -b feature/your-feature-name`).
+3. Implemente a sua feature e commit as mudancas.
+4. Envie um pull request para review.
 
 ## Licença
 Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
