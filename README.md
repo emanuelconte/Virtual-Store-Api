@@ -15,7 +15,7 @@ Este é um projeto de API de um sistema para uma loja virtual. A API deve gerenc
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/loja-virtual.git
+   git clone https://github.com/emanuelconte/loja-virtual.git
    cd loja-virtual
 
 ### Configuração do Banco de Dados:
@@ -54,7 +54,7 @@ A documentação da API foi gerada utilizando o Springdoc OpenAPI, que é a bibl
 
 ### Acesso à Documentação
 
-Para acessar a documentação no Swagger, abra o navegador e acesse:
+Para acessar a documentação no Swagger, abra o navegador com o projeto em execucao e acesse:
 
 http://localhost:8080/swagger-ui/index.html#/
 
