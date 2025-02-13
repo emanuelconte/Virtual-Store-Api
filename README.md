@@ -63,6 +63,17 @@ Para facilitar os testes da API, você pode importar a coleção do Postman disp
 
 https://documenter.getpostman.com/view/9651766/2sAYXCkK6g
 
+## Testes Unitários
+Foram implementados testes unitários para garantir a qualidade e o funcionamento correto das funcionalidades da API. Os testes foram desenvolvidos utilizando JUnit e Mockito, seguindo as boas práticas de desenvolvimento de software.
+
+### Executando os Testes:
+
+Para executar todos os testes unitários, utilize o seguinte comando:
+
+```bash
+mvn test
+```
+
 ### Dificuldades Encontradas
 - Problemas com o Lombok: 
 Durante o desenvolvimento, enfrentei dificuldades com o Lombok. Não tenho certeza se foi um problema com a IDE utilizada no projeto, mas mesmo após reinstalar várias vezes, o plugin do Lombok funcionou apenas parcialmente. Tive dificuldades em definir métodos getter e setter nas minhas entidades.
