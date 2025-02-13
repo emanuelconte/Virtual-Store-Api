@@ -84,3 +84,9 @@ Optei por utilizar o Springdoc OpenAPI em vez do Swagger tradicional, pois ele �
 - Migrations com Flyway: 
 Utilizei o Flyway para gerenciar as migrations do banco de dados. É necessário criar o banco de dados manualmente com o nome lojavirtual. A criação das tabelas será feita de maneira automática pelo Flyway.
 
+## Contribuição
+Se você deseja contribuir com este projeto, sinta-se à vontade para abrir issues ou enviar pull requests. Toda contribuição é bem-vinda!
+
+## Licença
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
