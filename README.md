@@ -88,5 +88,12 @@ Utilizei o Flyway para gerenciar as migrations do banco de dados. É necessário
 Se você deseja contribuir com este projeto, sinta-se à vontade para abrir issues ou enviar pull requests. Toda contribuição é bem-vinda!
 
 ## Licença
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
+
+## Contato
+Para perguntas ou sugestoes, entre em contato:
+- **Name**: Emanuel
+- **Email**: [emanuelcontecardoso@gmail.com](mailto:emanuelcontecardoso@gmail.com)
+- **GitHub**: [emanuelconte](https://github.com/emanuelconte)
+
 
