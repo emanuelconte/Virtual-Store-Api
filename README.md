@@ -1,104 +1,100 @@
-# Projeto Loja Virtual
+# Virtual Store Project
 
-Este é um projeto de API de um sistema para uma loja virtual. A API deve gerenciar o catálogo de produtos e os pedidos realizados pelos clientes. O objetivo é criar uma solução robusta, capaz de lidar com um grande volume de dados, garantindo performance, segurança e boas práticas de desenvolvimento, desenvolvido com Spring Boot e MySQL.
+This is an API project for an online store system. The API manages the product catalog and customer orders. The goal is to create a robust solution capable of handling a large volume of data while ensuring performance, security, and best development practices, built with Spring Boot and MySQL.
 
-## Instalação e Configuração
+## Installation and Configuration
 
-### Pré-requisitos
+### Prerequisites
 
-- Java 17 ou superior
-- Maven 3.x
-- MySQL 8.x
-- IDE de sua preferência (recomendado IntelliJ IDEA ou Eclipse)
+- Java 17 or later  
+- Maven 3.x  
+- MySQL 8.x  
+- IDE of your choice (recommended: IntelliJ IDEA or Eclipse)  
 
-### Passos para Instalação
+### Installation Steps
 
-1. **Clone o repositório**:
+1. **Clone the repository**:  
    ```bash
    git clone https://github.com/emanuelconte/loja-virtual.git
    cd loja-virtual
+   ```
 
-### Configuração do Banco de Dados:
+### Database Configuration
 
-1. Crie um banco de dados manualmente com o nome lojavirtual.
+1. Manually create a database named `lojavirtual`.
 
-2. Configure as credenciais do banco de dados no arquivo application.properties:
-```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/lojavirtual
-spring.datasource.username=root
-spring.datasource.password=admin
-```
+2. Configure the database credentials in the `application.properties` file:
+   ```bash
+   spring.datasource.url=jdbc:mysql://localhost:3306/lojavirtual
+   spring.datasource.username=root
+   spring.datasource.password=admin
+   ```
 
 ### Migrations
 
-O projeto utiliza o Flyway para gerenciar as migrations do banco de dados. As migrations estão localizadas em `src/main/resources/db/migration`.
+This project uses Flyway to manage database migrations. The migration scripts are located in `src/main/resources/db/migration`.
 
-- **Migrations Aplicadas**: O Flyway rastreia as migrations aplicadas na tabela `flyway_schema_history`.
-- **Recriação do Banco de Dados**: Ao recriar o banco de dados, o Flyway aplicará todas as migrations novamente.
+- **Applied Migrations**: Flyway tracks applied migrations in the `flyway_schema_history` table.  
+- **Database Recreation**: If you recreate the database, Flyway will reapply all migrations.
 
-### Dados Iniciais
+### Initial Data
 
-Os dados iniciais são inseridos através da migration `V2__populate_data.sql`. Certifique-se de que essa migration esteja configurada corretamente.
+Initial data is inserted through the migration file `V2__populate_data.sql`. Ensure this migration is configured correctly.
 
-## Executando o Projeto
+## Running the Project
 
-### Execute o projeto utilizando o Maven:
+### Run the project using Maven:
 ```bash
 mvn spring-boot:run
 ```
 
-## Utilização da API
-### Documentação da API
+## API Usage
 
-A documentação da API foi gerada utilizando o Springdoc OpenAPI, que é a biblioteca mais moderna e compatível com o Spring Boot 3.x.
+### API Documentation
 
-### Acesso à Documentação
+The API documentation was generated using Springdoc OpenAPI, which is the most modern and compatible library for Spring Boot 3.x.
 
-Para acessar a documentação no Swagger, abra o navegador com o projeto em execucao e acesse:
+### Accessing the Documentation
 
-http://localhost:8080/swagger-ui/index.html#/
+To access the documentation in Swagger, open your browser while the project is running and go to:
 
-### Testes no Postman
-Para facilitar os testes da API, você pode importar a coleção do Postman disponível no link abaixo:
+[http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
 
-https://documenter.getpostman.com/view/9651766/2sAYXCkK6g
+### Testing with Postman
 
-## Testes Unitários
-Foram implementados testes unitários para garantir a qualidade e o funcionamento correto das funcionalidades da API. Os testes foram desenvolvidos utilizando JUnit e Mockito, seguindo as boas práticas de desenvolvimento de software.
+To facilitate API testing, you can import the Postman collection available at the following link:
 
-### Executando os Testes:
+[https://documenter.getpostman.com/view/9651766/2sAYXCkK6g](https://documenter.getpostman.com/view/9651766/2sAYXCkK6g)
 
-Para executar todos os testes unitários, utilize o seguinte comando:
+## Unit Tests
+
+Unit tests have been implemented to ensure the quality and correct functionality of the API. The tests were developed using JUnit and Mockito, following best software development practices.
+
+### Running Tests
+
+To run all unit tests, use the following command:
 
 ```bash
 mvn test
 ```
 
-### Dificuldades Encontradas
-- Problemas com o Lombok: 
-Durante o desenvolvimento, enfrentei dificuldades com o Lombok. Não tenho certeza se foi um problema com a IDE utilizada no projeto, mas mesmo após reinstalar várias vezes, o plugin do Lombok funcionou apenas parcialmente. Tive dificuldades em definir métodos getter e setter nas minhas entidades.
+## Contribution
 
-- Utilização do Springdoc OpenAPI: 
-Optei por utilizar o Springdoc OpenAPI em vez do Swagger tradicional, pois ele é mais moderno e compatível com o Spring Boot 3.x. A documentação gerada pode ser acessada através do endpoint mencionado acima.
+If you want to contribute to this project, feel free to open issues or submit pull requests. All contributions are welcome!  
 
-- Migrations com Flyway: 
-Utilizei o Flyway para gerenciar as migrations do banco de dados. É necessário criar o banco de dados manualmente com o nome lojavirtual. A criação das tabelas será feita de maneira automática pelo Flyway.
+1. Fork the repository.  
+2. Create a branch with the feature (`git checkout -b feature/your-feature-name`).  
+3. Implement your feature and commit the changes.  
+4. Submit a pull request for review.  
 
-## Contribuição
-Se você deseja contribuir com este projeto, sinta-se à vontade para abrir issues ou enviar pull requests. Toda contribuição é bem-vinda!
-1. Fork no repositorio.
-2. Crie uma branch com a feature (
-`git checkout -b feature/your-feature-name`).
-3. Implemente a sua feature e commit as mudancas.
-4. Envie um pull request para review.
+## License
 
-## Licença
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.  
 
-## Contato
-Para perguntas ou sugestoes, entre em contato:
-- **Name**: Emanuel
-- **Email**: [emanuelcontecardoso@gmail.com](mailto:emanuelcontecardoso@gmail.com)
-- **GitHub**: [emanuelconte](https://github.com/emanuelconte)
+## Contact
 
+For questions or suggestions, feel free to reach out:  
 
+- **Name**: Emanuel  
+- **Email**: [emanuelcontecardoso@gmail.com](mailto:emanuelcontecardoso@gmail.com)  
+- **GitHub**: [emanuelconte](https://github.com/emanuelconte)  
